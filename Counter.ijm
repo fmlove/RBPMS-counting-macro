@@ -34,6 +34,8 @@ for(i = 0; i < files.length; i++){
 	run("Watershed");
 	run("Find Maxima...", "prominence=10 output=Count");
 
+	setResult("File", i, files[i]);
+
 	close("*");//should skip Results
 	
 }
