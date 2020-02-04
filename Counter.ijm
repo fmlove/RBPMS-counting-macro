@@ -3,11 +3,13 @@ setBatchMode(true);
 dir = getDirectory("Select your data folder");
 files = getFileList(dir);
 for(i = 0; i < files.length; i++){
-	open(files[i]);
+	open(files[i]);//TODO - skip non-image files
+
+	
 	
 	rename("original");
 	run("Duplicate...", "title=blur");
-	run("Gaussian Blur...", "sigma=15");
+	run("Gaussian Blur...", "sigma=10");
 	
 	imageCalculator("Subtract create 32-bit", "original","blur");
 	rename("pseudo_corr");
