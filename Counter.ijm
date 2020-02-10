@@ -3,8 +3,19 @@ setBatchMode(true);
 dir = getDirectory("Select your data folder");
 files = getFileList(dir);
 for(i = 0; i < files.length; i++){
-	open(files[i]);//TODO - skip non-image files
-
+	//skip subdirectories
+	if(endsWith(files[i], "/")){
+		continue();
+	}
+	
+	open(files[i]);//TODO - handle non-openable
+	//no error handling - add option to specify format
+	
+	//skip non-image files
+	if(nImages == 0){
+		run("Close");
+		continue();
+	}
 	
 	
 	rename("original");
@@ -42,6 +53,7 @@ for(i = 0; i < files.length; i++){
 	
 }
 
-	//save results at end
+	//save results
+	//TODO - check if already exists and increment name
 	saveAs("Results", dir + "results.csv");//saves to input folder
 	
