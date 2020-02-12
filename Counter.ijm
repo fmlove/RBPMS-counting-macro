@@ -1,9 +1,28 @@
 setBatchMode(true);
 
 dir = getDirectory("Select your data folder");
+files = getFileList(dir);
+acceptable_ext = newArray(//selection of native formats - can add more as necessary
+	"tif"
+	,"tiff"
+	,"gif"
+	,"jpg"
+	,"jpeg"
+	,"png"
+	,"bmp"
+);
+present_ext = newArray(0);
+for(e = 0; e < acceptable_ext.length; e++){
+	for(i = 0; i < files.length; i++){
+		if( endsWith(files[i], "."+acceptable_ext[e]) ){
+			present_ext = Array.concat(present_ext, acceptable_ext[e]);
+			break();
+			}
+	}
+}
 
 Dialog.create("Options");
-Dialog.addChoice("File extension", newArray("tif"), "tif");//ADD MORE - adjust by folder
+Dialog.addChoice("File extension", present_ext);//ADD MORE - adjust by folder
 Dialog.addNumber("Gaussian blur sigma (radius)", 10);
 Dialog.addNumber("Feature radius", 15);
 Dialog.addMessage("More options for 3D Edge and Symmetry Filter:");
@@ -19,7 +38,7 @@ canny = Dialog.getNumber();
 norm = Dialog.getNumber();
 scal = Dialog.getNumber();
 
-files = getFileList(dir);
+
 for(i = 0; i < files.length; i++){
 	//skip subdirectories
 	if(endsWith(files[i], "/")){
