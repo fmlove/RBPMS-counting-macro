@@ -38,22 +38,17 @@ canny = Dialog.getNumber();
 norm = Dialog.getNumber();
 scal = Dialog.getNumber();
 
-
+images = newArray(0);
 for(i = 0; i < files.length; i++){
-	//skip subdirectories
-	if(endsWith(files[i], "/")){
-		continue();
+	if( endsWith(files[i], "."+ext) ){
+		images = Array.concat(images, files[i]);
 	}
-	
-	open(files[i]);//TODO - handle non-openable
-	//no error handling - add option to specify format
-	
-	//skip non-image files
-	if(nImages == 0){
-		run("Close");
-		continue();
-	}
-	
+}
+
+
+for(i = 0; i < images.length; i++){
+		
+	open(images[i]);
 	
 	rename("original");
 	run("Duplicate...", "title=blur");
@@ -84,7 +79,7 @@ for(i = 0; i < files.length; i++){
 	run("Watershed");
 	run("Find Maxima...", "prominence=10 output=Count");
 
-	setResult("File", i, files[i]);
+	setResult("File", i, images[i]);
 
 	close("*");//should skip Results
 	
