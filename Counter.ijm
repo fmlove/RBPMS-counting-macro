@@ -29,6 +29,7 @@ Dialog.addMessage("More options for 3D Edge and Symmetry Filter:");
 Dialog.addNumber("alpha Canny", 0.500);
 Dialog.addNumber("Normalization", 10.00);
 Dialog.addNumber("Scaling", 2.00);
+Dialog.addCheckbox("Save points?", false);
 Dialog.show();
 
 ext = Dialog.getChoice();
@@ -37,6 +38,7 @@ rad = Dialog.getNumber();
 canny = Dialog.getNumber();
 norm = Dialog.getNumber();
 scal = Dialog.getNumber();
+points = Dialog.getCheckbox();
 
 images = newArray(0);
 for(i = 0; i < files.length; i++){
@@ -79,6 +81,15 @@ for(i = 0; i < images.length; i++){
 	run("Watershed");
 	run("Find Maxima...", "prominence=10 output=Count");
 
+	if(points == true){
+		//save points as well as count
+		run("Find Maxima...", "prominence=10 output=[Point Selection]");
+		run("Analyze Particles...", "add");
+		roiManager("save", dir+images[i]+"_points.zip");
+		close("ROI Manager");
+	}
+	
+	
 	setResult("File", i, images[i]);
 
 	close("*");//should skip Results
