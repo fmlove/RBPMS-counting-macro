@@ -11,4 +11,4 @@ To use this macro, clone or download the repository.  The `Counter.ijm` file can
 * Select the folder containing images to be counted.
 * Select the file extension of the images to be counted.
 * Adjust any parameters as necessary (the default values have been optimised on a selection of RBPMS images with manual counts).
-* Click 'OK'.  The macro will save a file called `results.csv`, containing the counted cell numbers for each file, in the folder with your images.
+* Click 'OK'.  The macro will save a file called `results.csv`, containing the counted cell numbers for each file, in the folder with your images.  If the 'Save points?' checkbox is selected, the macro will also save .zip files, with names matching the corresponding images, that can be loaded into the ROI manager to visualise the points counted.
